@@ -4,10 +4,22 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
   <context id="simple" targetRuntime="MyBatis3">
-    <!-- マッパxmlファイルを生成時に上書きするためのプラグイン -->
+
+    <!-- equalsとhashCodeを追加 -->
+    <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+    <!-- フルエントインタフェースを追加 -->
+    <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin" />
+    <!-- @Mapperを追加 -->
+    <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+    <!-- XMLをマージしない(mybatis-generator-pluginのoverwrite設定も参考のこと) -->
     <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
     <!-- ページングを行うためのプラグイン -->
-    <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+    <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
+
+    <plugin type="com.example.mybatisgeneratorpoc.mybatis.generator.ToOptionalPlugin">
+      <property name="excludeColumns" value="created_at,updated_at,updated_by,update_cause,version" />
+    </plugin>
+
     <!-- 生成される Java ファイルのコメントに日付を付与しない -->
     <commentGenerator>
       <property name="suppressAllComments" value="true" />
@@ -16,20 +28,26 @@
     <!-- reference the parameters by using ${...} -->
     <jdbcConnection
       driverClass="org.postgresql.Driver"
-      connectionURL="jdbc:postgresql://localhost:5432/xxx"
-      userId="yyy"
-      password="zzz"
+      connectionURL="jdbc:postgresql://localhost:5432/example"
+      userId="example"
+      password="example"
     />
 
     <javaTypeResolver>
       <property name="useJSR310Types" value="true" />
     </javaTypeResolver>
 
-    <javaModelGenerator targetPackage="com.example.mybatisgeneratorpoc.model" targetProject="src/main/java" />
+    <javaModelGenerator targetPackage="com.example.mybatisgeneratorpoc.entity" targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaModelGenerator>
 
-    <sqlMapGenerator targetPackage="com.example.mybatisgeneratorpoc.mapper" targetProject="src/main/java" />
+    <sqlMapGenerator targetPackage="com.example.mybatisgeneratorpoc.mapper" targetProject="src/main/resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
 
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mybatisgeneratorpoc.mapper" targetProject="src/main/java" />
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mybatisgeneratorpoc.mapper" targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
 
     <table schema="mybatisgeneratorpoc" tableName="todo" />
   </context>

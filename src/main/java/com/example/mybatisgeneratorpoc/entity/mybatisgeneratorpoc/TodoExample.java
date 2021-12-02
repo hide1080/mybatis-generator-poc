@@ -1,4 +1,4 @@
-package com.example.mybatisgeneratorpoc.model;
+package com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

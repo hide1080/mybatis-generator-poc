@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mybatisgeneratorpoc.mapper.TodoMapper">
-  <resultMap id="BaseResultMap" type="com.example.mybatisgeneratorpoc.model.Todo">
+<mapper namespace="com.example.mybatisgeneratorpoc.mapper.mybatisgeneratorpoc.TodoMapper">
+  <resultMap id="BaseResultMap" type="com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.Todo">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="details" jdbcType="VARCHAR" property="details" />
@@ -73,7 +73,7 @@
   <sql id="Base_Column_List">
     id, title, details, finished, created_at, updated_at, updated_by, update_cause, version
   </sql>
-  <select id="selectByExample" parameterType="com.example.mybatisgeneratorpoc.model.TodoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.TodoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,13 +87,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.mybatisgeneratorpoc.model.TodoExample">
+  <delete id="deleteByExample" parameterType="com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.TodoExample">
     delete from mybatisgeneratorpoc.todo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.mybatisgeneratorpoc.model.Todo">
+  <insert id="insert" parameterType="com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.Todo">
     insert into mybatisgeneratorpoc.todo (id, title, details, 
       finished, created_at, updated_at, 
       updated_by, update_cause, version
@@ -103,7 +103,7 @@
       #{updatedBy,jdbcType=BIGINT}, #{updateCause,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.mybatisgeneratorpoc.model.Todo">
+  <insert id="insertSelective" parameterType="com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.Todo">
     insert into mybatisgeneratorpoc.todo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -164,7 +164,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.mybatisgeneratorpoc.model.TodoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.TodoExample" resultType="java.lang.Long">
     select count(*) from mybatisgeneratorpoc.todo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -220,18 +220,4 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.mybatisgeneratorpoc.model.TodoExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from mybatisgeneratorpoc.todo
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
 </mapper>

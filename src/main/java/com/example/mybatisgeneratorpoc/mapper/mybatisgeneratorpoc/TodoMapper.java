@@ -1,11 +1,12 @@
-package com.example.mybatisgeneratorpoc.mapper;
+package com.example.mybatisgeneratorpoc.mapper.mybatisgeneratorpoc;
 
-import com.example.mybatisgeneratorpoc.model.Todo;
-import com.example.mybatisgeneratorpoc.model.TodoExample;
+import com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.Todo;
+import com.example.mybatisgeneratorpoc.entity.mybatisgeneratorpoc.TodoExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
 
+@Mapper
 public interface TodoMapper {
     long countByExample(TodoExample example);
 
@@ -14,8 +15,6 @@ public interface TodoMapper {
     int insert(Todo record);
 
     int insertSelective(Todo record);
-
-    List<Todo> selectByExampleWithRowbounds(TodoExample example, RowBounds rowBounds);
 
     List<Todo> selectByExample(TodoExample example);
 
